@@ -4,8 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub Job Issue</title>
+
+    <!--daisyui+tailwind-->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!--icon-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+
+     <style>
+        .geist{
+             font-family: "Geist", sans-serif;
+        }
+     </style>
+
 </head>
-<body>
+<body class="geist">
+
+     <header id="login">
+        <div id="loginPage" class="mt-5 ">
+
+      <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4
+       w-6/12 mx-auto space-y-2">
+
+       <div class="loginimage text-center flex flex-col items-center justify-center space-y-5 mb-4">
+
+        <div><img class="" src="./assets/github-logo.png" alt="github-logo"></div>
+         <div><h1 class="text-xl font-bold">GitHub Issues Tracker</h1>
+        <p class="text-gray-400">Sign in to manage your issues</p></div>
+
+       </div>
+
+       <div class="space-y-4">
+          <div>
+            <label class="label text-black">Username</label>
+            <input id="Username" type="text" class="input" placeholder="Enter Username" />
+          </div>
+
+          <div>
+            <label class="label text-black">Password</label>
+            <input id="password" type="password" class="input" placeholder="Enter Password" />
+          </div>
+
+       </div>
+
+      <button class="btn btn-primary mt-4" onclick="loginPass()">Sign In</button>
+
+      <div class="flex items-center my-4">
+        <hr class="flex-grow border-gray-300">
+        <span class="px-3 text-gray-500">OR</span>
+        <hr class="flex-grow border-gray-300">
+
+      </div>
+
+      <div class="text-center py-2 space-y-3">
+        <p>Demo credintial</p>
+        <div class="shadow-lg p-3">
+            <p><span class="font-bold">Username:</span> admin</p>
+            <p><span font-bold>Password:</span> admin123</p>
+        </div>
+      </div>
+
+    </fieldset>
+
+     </div>
+     </header>
+
+    
+     <main id="main" class="mt-5 text-center hidden">
+        <h1 class="font-bold text-4xl">Welcome to body</h1>
+     </main>
     
     
     <script src="./script/index.js"></script>
