@@ -4,32 +4,34 @@ const manageSpinner = (status) => {
        document.getElementById("card-conatiner").classList.add("hidden");
   }
   else{
-      setTimeout( () =>{
+      setTimeout( () => {
             document.getElementById("spinner").classList.add("hidden");
             document.getElementById("card-conatiner").classList.remove("hidden");
-      },200);
+      },20);
   }
  }
-// const loginPass = () => {
- //      manageSpinner(true);
-//     const login = document.getElementById("login");
-//     const main = document.getElementById("main");
+const loginPass = () => {
+      manageSpinner(true);
+    const login = document.getElementById("login");
+    const main = document.getElementById("main");
 
-//     const username = document.getElementById("Username");
-//     const password = document.getElementById("password");
+    const username = document.getElementById("Username");
+    const password = document.getElementById("password");
 
-//     console.log("username :" + username.value);
-//     console.log("pasword :" + password.value);
+    console.log("username :" + username.value);
+    console.log("pasword :" + password.value);
 
-//     if(username.value === "admin" && password.value === "admin123"){
-//         login.classList.add("hidden");
-//         main.classList.remove("hidden");
-//     }
-//     else{
-//         alert("Invalid Username or Password");
-//     }
-//       manageSpinner(false);
-// }
+    if(username.value === "admin" && password.value === "admin123"){
+        login.classList.add("hidden");
+        main.classList.remove("hidden");
+    }
+    else{
+        alert("Invalid Username or Password");
+        username.value = "";
+        password.value = "";
+    }
+      manageSpinner(false);
+}
 
 let allIssues = [];
 let filtedIssue = [];
@@ -139,6 +141,8 @@ const displayAllIssues = (data) => {
 
 const activeBtn = (id) => {
     manageSpinner(true);
+
+    document.getElementById("input-search").value = "";
     
     const cardConatiner = document.getElementById("card-conatiner");
     const issueNumber = document.getElementById("issue-number");
@@ -267,10 +271,16 @@ const displayModal = (id) => {
     document.getElementById("my_modal").showModal();
 }
 
+const remoActive = () => {
+    document.getElementById("btn-all").classList.remove("btn-primary");
+    document.getElementById("btn-open").classList.remove("btn-primary");
+    document.getElementById("btn-close").classList.remove("btn-primary");
+}
+
 const searchIssue = () => {
     manageSpinner(true);
+    remoActive();
   const input = document.getElementById("input-search").value.trim().toLocaleLowerCase();
-  console.log(input);
 
   fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
   .then(res => res.json())
@@ -281,7 +291,10 @@ const searchIssue = () => {
           items.title.toLowerCase().includes(input)
         ); 
         displayAllIssues(filteSearch); 
-  })
+        let len = filteSearch.length;
+         document.getElementById("issue-number").innerText = len;
+  });
+   
   manageSpinner(false);
 }
 
