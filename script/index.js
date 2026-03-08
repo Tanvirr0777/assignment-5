@@ -38,7 +38,8 @@ const displayAllIssues = (data) => {
 
          const cardBody = document.createElement("div");
          cardBody.innerHTML = `
-           <div class="h-85 px-1 py-3 shadow-sm rounded-lg shadow-sm
+           <div onclick="loadModal(${element.id})"
+            class="h-85 px-1 py-3 shadow-sm rounded-lg shadow-sm
            ${element.status === 'open' ?
              "border-t-3 border-green-500" : "border-t-3 border-violet-500"
            }
@@ -153,6 +154,95 @@ const activeBtn = (id) => {
         displayAllIssues(allIssues);
         issueNumber.innerText = allIssues.length;
     }
+}
+
+const loadModal = async(id) => {
+     const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`
+     const res = await fetch(url);
+     const details = await res.json();
+    // console.log(details.data);
+     displayModal(details.data);
+}
+
+const displayModal = (id) => {
+    const modalContainer = document.getElementById("modal-details");
+
+    modalContainer.innerHTML = `
+    
+        <h1 class="text-xl font-bold text-left">${id.title}</h1>
+
+               <div class="flex gap-3 text-gray-400 my-3 items-center">
+                      <div class="bg-green-500 rounded-2xl px-3  text-white">
+                      ${id.status}ed</div>
+                      <div> <i class="fa-solid fa-circle"></i>
+                       ${id.assignee?'Opened by'+' '+ id.assignee : 'Not assignee'}
+                            <i class="fa-solid fa-circle"></i>${id.createdAt.split("T")[0]} 
+                      </div>
+               </div>
+
+               <div class="flex gap-3 my-3">
+                    <div class="rounded-2xl px-3 border
+                     ${id.labels[0]==='enhancement' ? 
+                        "bg-green-100 text-green-400" :
+                         "bg-[#FEECEC] text-red-500"
+                      }
+                    ">
+                    <i class=" 
+                      ${id.labels[0]==='enhancement' ? 
+                        "fa-solid fa-arrow-up-right-dots text-green-400" : 
+                        id.labels[0]=== 'documentation' ? 
+                        "fa-solid fa-file-code" :
+                        "fa-solid fa-bug"
+                      }
+                      "></i>
+                    ${id.labels[0]?id.labels[0].toUpperCase():""}
+                    </div>
+
+                    <div class="rounded-2xl px-3 border
+                     ${id.labels[1]==='enhancement' ? 
+                        "bg-green-100 text-green-400" :
+                         id.labels[1] === "bug" ? 
+                         "bg-[#FEECEC] text-red-500" :
+                        "bg-yellow-100 text-yellow-500" 
+                         
+                      }
+                    ">
+                    <i class=" 
+                      ${id.labels[1]==="enhancement" ? 
+                        "fa-solid fa-arrow-up-right-dots text-green-400" : 
+                        id.labels[1]=== "documentation" ? 
+                        "fa-solid fa-file-code" :
+                        id.labels[1] === "bug" ? "fa-solid fa-bug":
+                        id.labels[1] === "help wanted" ? "fa-solid fa-life-ring" :
+                        "fa-solid fa-thumbs-up"                       
+                      }
+                      "></i>
+                   ${id.labels[1]?id.labels[1].toUpperCase():""}
+                   
+                   </div>
+               </div>
+
+               <p class="my-4 text-gray-400 text-left">${id.description}</p>
+
+               <div class="shadow-sm p-3 flex justify-between text-left">
+                   <div>
+                       <h3 class="text-gray-400">Assignee: </h3>
+                       <h2>${id.assignee.toUpperCase()? id.assignee.toUpperCase() :
+                        'Not assignee' }</h2>
+                   </div>
+                   <div>
+                       <h3 class="text-gray-400">Priority :</h3>
+                       <div class=" rounded-xl px-3 border
+                       ${id.priority === 'low' ? "bg-gray-100 text-gray-500 " :
+                        id.priority === 'medium' ? "bg-[#FFF8DB] text-[#D97706]" :
+                        "bg-red-500 text-white "
+
+                       } ">
+                       ${id.priority.toUpperCase()}</div>
+                   </div>
+               </div>
+    `;
+    document.getElementById("my_modal").showModal();
 }
 
 
