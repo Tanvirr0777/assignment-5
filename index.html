@@ -21,6 +21,7 @@
         .geist{
              font-family: "Geist", sans-serif;
         }
+
      </style>
 
 </head>
@@ -74,10 +75,80 @@
 
      </div>
      </header>
-
     
-     <main id="main" class="mt-5 text-center hidden">
+     <main id="main" class="mt-5 text-center w-11/12 mx-auto">
+
         <h1 class="font-bold text-4xl">Welcome to body</h1>
+
+        <header>
+    <div class="navbar bg-base-100 shadow-sm flex justify-between ">
+
+    <div class="flex">
+      
+         <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+             <div class="w-10 rounded-full">
+              <img
+                alt="gitHub-logo"
+                src="./assets/github-logo.png"/>
+             </div>
+          </div>
+
+         <div class=""> <a class="btn btn-ghost text-xl">GitHub Issues Tracker</a></div>
+     </div> 
+    
+  
+       <div class="flex gap-2">
+         <div>
+            <input type="text" placeholder="Search issue"
+             class="input input-bordered"/>
+         </div>
+         <div><button class="btn btn-primary">+ New issue</button></div>
+      </div>       
+   </div>
+     </header>
+
+     <div class="py-2 flex gap-2 shadow-sm mt-10 w-[97%] mx-auto">
+        <button id="btn-all" class="btn btn-primary w-25" onclick="activeBtn('btn-all')">All</button>
+        <button id="btn-open" class="btn w-24" onclick="activeBtn('btn-open')">Open</button>
+        <button id="btn-close" class="btn w-25" onclick="activeBtn('btn-close')">Close</button>
+     </div>
+
+      <div class="mt-8 shadow-sm flex justify-between p-3 w-[97%] mx-auto">
+
+        <div class="flex gap-2">
+         <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+             <div class="w-10 rounded-full">
+                <img src="./assets/Aperture.png" alt="">
+             </div>
+          </div>
+
+         <div class="text-left"> 
+              <h2 class="text-xl font-bold">50 Issues</h2>
+              <p class="text-gray-400">Track and manage your project issues</p>
+         </div>
+     </div> 
+    
+        <div class="flex gap-4">
+            <div><i class="fa-solid fa-circle text-green-500"></i>Open</div>
+            <div><i class="fa-solid fa-circle text-violet-500"></i>Close</div>
+
+        </div>
+
+      </div>
+
+      <section id="card-conatiner" class="mt-5 w-[97%] mx-auto grid grid-cols-4 gap-5">  
+
+      </section>
+
+      <section id="open-card" class="mt-5 w-[97%] mx-auto grid grid-cols-4 gap-5 hidden">  
+
+      </section>
+
+      <section id="close-card" class="mt-5 w-[97%] mx-auto grid grid-cols-4 gap-5 hidden">  
+
+      </section>
+      
+
      </main>
     
     
