@@ -122,6 +122,7 @@ const displayAllIssues = (data) => {
 
 const activeBtn = (id) => {
     const cardConatiner = document.getElementById("card-conatiner");
+    const issueNumber = document.getElementById("issue-number");
 
     const btnAll = document.getElementById("btn-all");
     btnAll.classList.remove("btn-primary");
@@ -138,19 +139,19 @@ const activeBtn = (id) => {
     if(id === 'btn-open'){
         const filtedIssue = allIssues.filter(substance => substance.status !== 'closed');
         openLen = filtedIssue.length;
-        console.log(openLen);
+        issueNumber.innerText = openLen;
         displayAllIssues(filtedIssue);   
     }
 
     if(id === 'btn-close'){
         const filtedIssue = allIssues.filter(substance => substance.status !== 'open');
         openLen = filtedIssue.length;
-        console.log(openLen);
+        issueNumber.innerText = openLen;
         displayAllIssues(filtedIssue);
     }
     if(id === 'btn-all'){
         displayAllIssues(allIssues);
-        console.log(allIssues.length)
+        issueNumber.innerText = allIssues.length;
     }
 }
 
