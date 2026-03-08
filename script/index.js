@@ -1,4 +1,4 @@
- let cardArray = [];
+ 
 // const loginPass = () => {
 //     const login = document.getElementById("login");
 //     const main = document.getElementById("main");
@@ -17,11 +17,16 @@
 //         alert("Invalid Username or Password");
 //     }
 // }
+let allIssues = [];
+let filtedIssue = [];
 
 const loadIssues = () => {
     fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     .then(res => res.json())
-    .then(data => displayAllIssues(data.data));
+    .then(data => {
+        allIssues = data.data;
+        displayAllIssues(data.data);
+    });
 }
 loadIssues();
 
@@ -30,10 +35,6 @@ const displayAllIssues = (data) => {
     cardConatiner.innerHTML = "";
 
     data.forEach(element => {
-         
-        cardArray.push({
-            element
-         });
 
          const cardBody = document.createElement("div");
          cardBody.innerHTML = `
@@ -115,16 +116,12 @@ const displayAllIssues = (data) => {
          </div> 
          `;
 
-         cardConatiner.appendChild(cardBody);
-        
+         cardConatiner.appendChild(cardBody);      
     });
-    
 }
 
 const activeBtn = (id) => {
     const cardConatiner = document.getElementById("card-conatiner");
-    const openCard = document.getElementById("open-card");
-    const closeCard = document.getElementById("close-card");
 
     const btnAll = document.getElementById("btn-all");
     btnAll.classList.remove("btn-primary");
@@ -139,30 +136,22 @@ const activeBtn = (id) => {
     btn.classList.add("btn-primary") 
 
     if(id === 'btn-open'){
-        const updateCard = cardArray.filter(substance => substance.element.status != 'closed');
-        cardArray = updateCard;
-
-        cardConatiner.classList.add("hidden");
-        closeCard.classList.add("hidden");
-        openCard.classList.remove("hidden");
+        const filtedIssue = allIssues.filter(substance => substance.status !== 'closed');
+        openLen = filtedIssue.length;
+        console.log(openLen);
+        displayAllIssues(filtedIssue);   
     }
-    if(id === 'btn-close'){
-        const updateCard = cardArray.filter(substance => substance.element.status != 'open');
-        cardArray = updateCard ;
 
-        cardConatiner.classList.add("hidden");
-        openCard.classList.add("hidden");
-        closeCard.classList.remove("hidden");
+    if(id === 'btn-close'){
+        const filtedIssue = allIssues.filter(substance => substance.status !== 'open');
+        openLen = filtedIssue.length;
+        console.log(openLen);
+        displayAllIssues(filtedIssue);
     }
     if(id === 'btn-all'){
-        openCard.classList.add("hidden");
-        closeCard.classList.add("hidden");
-        cardConatiner.classList.remove("hidden");
+        displayAllIssues(allIssues);
+        console.log(allIssues.length)
     }
-    console.log(cardArray);
-
-    cardArray = [];
-    loadIssues();
-    
 }
+
 
