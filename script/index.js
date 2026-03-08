@@ -129,7 +129,7 @@ const displayAllIssues = (data) => {
             <div class="text-left">
                 <hr class="text-gray-300">
                 <p class="text-gray-400 mt-3">#by ${element.author}</p>
-                <p class="text-gray-400 mt-1">${element.updatedAt.split("T")[0]}</p>
+                <p class="text-gray-400 mt-1">${element.createdAt.split("T")[0]}</p>
             </div>
 
          </div> 
@@ -202,7 +202,7 @@ const displayModal = (id) => {
                       ${id.status}ed</div>
                       <div> <i class="fa-solid fa-circle"></i>
                        ${id.assignee?'Opened by'+' '+ id.assignee : 'Not assignee'}
-                            <i class="fa-solid fa-circle"></i>${id.createdAt.split("T")[0]} 
+                            <i class="fa-solid fa-circle"></i>${id.updatedAt.split("T")[0]} 
                       </div>
                </div>
 
