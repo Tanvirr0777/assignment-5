@@ -1,5 +1,15 @@
- 
+const manageSpinner = (status) => {
+  if(status == true){
+       document.getElementById("spinner").classList.remove("hidden");
+       document.getElementById("card-conatiner").classList.add("hidden");
+  }
+  else{
+     document.getElementById("spinner").classList.add("hidden");
+     document.getElementById("card-conatiner").classList.remove("hidden");
+  }
+ }
 // const loginPass = () => {
+ //      manageSpinner(true);
 //     const login = document.getElementById("login");
 //     const main = document.getElementById("main");
 
@@ -16,16 +26,20 @@
 //     else{
 //         alert("Invalid Username or Password");
 //     }
+//       manageSpinner(false);
 // }
+
 let allIssues = [];
 let filtedIssue = [];
 
 const loadIssues = () => {
+    manageSpinner(true);
     fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     .then(res => res.json())
     .then(data => {
         allIssues = data.data;
         displayAllIssues(data.data);
+        manageSpinner(false);
     });
 }
 loadIssues();
@@ -39,7 +53,7 @@ const displayAllIssues = (data) => {
          const cardBody = document.createElement("div");
          cardBody.innerHTML = `
            <div onclick="loadModal(${element.id})"
-            class="h-85 px-1 py-3 shadow-sm rounded-lg shadow-sm
+            class="h-85 px-1 py-3 shadow-sm rounded-lg shadow-sm cursor-pointer
            ${element.status === 'open' ?
              "border-t-3 border-green-500" : "border-t-3 border-violet-500"
            }
@@ -122,6 +136,8 @@ const displayAllIssues = (data) => {
 }
 
 const activeBtn = (id) => {
+    manageSpinner(true);
+    
     const cardConatiner = document.getElementById("card-conatiner");
     const issueNumber = document.getElementById("issue-number");
 
@@ -154,17 +170,21 @@ const activeBtn = (id) => {
         displayAllIssues(allIssues);
         issueNumber.innerText = allIssues.length;
     }
+
+    manageSpinner(false);
 }
 
 const loadModal = async(id) => {
+     manageSpinner(true);
      const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`
      const res = await fetch(url);
      const details = await res.json();
-    // console.log(details.data);
      displayModal(details.data);
+     manageSpinner(false);
 }
 
 const displayModal = (id) => {
+
     const modalContainer = document.getElementById("modal-details");
 
     modalContainer.innerHTML = `
@@ -244,5 +264,4 @@ const displayModal = (id) => {
     `;
     document.getElementById("my_modal").showModal();
 }
-
 
