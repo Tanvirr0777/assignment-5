@@ -4,8 +4,10 @@ const manageSpinner = (status) => {
        document.getElementById("card-conatiner").classList.add("hidden");
   }
   else{
-     document.getElementById("spinner").classList.add("hidden");
-     document.getElementById("card-conatiner").classList.remove("hidden");
+      setTimeout( () =>{
+            document.getElementById("spinner").classList.add("hidden");
+            document.getElementById("card-conatiner").classList.remove("hidden");
+      },200);
   }
  }
 // const loginPass = () => {
@@ -264,4 +266,23 @@ const displayModal = (id) => {
     `;
     document.getElementById("my_modal").showModal();
 }
+
+const searchIssue = () => {
+    manageSpinner(true);
+  const input = document.getElementById("input-search").value.trim().toLocaleLowerCase();
+  console.log(input);
+
+  fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
+  .then(res => res.json())
+  .then(data => {
+    const allIssue = data.data;
+    console.log(allIssue);
+    const filteSearch = allIssue.filter(items =>
+          items.title.toLowerCase().includes(input)
+        ); 
+        displayAllIssues(filteSearch); 
+  })
+  manageSpinner(false);
+}
+
 
